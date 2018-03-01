@@ -5,5 +5,5 @@ Feature: Bowling sample feature
 
   Scenario: I never knock down pin
     Given a new bowling game
-    When all of my balls are landing in the gutter
+    When i roll the ball and hit 0 pins
     Then my score should be 0
