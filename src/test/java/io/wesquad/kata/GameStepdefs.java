@@ -20,7 +20,7 @@ public class GameStepdefs {
     }
 
     @Then("^my score should be (\\d+)$")
-    public void myScoreShouldBe(int arg0) throws Throwable {
-        assertEquals(0, game.getScore());
+    public void myScoreShouldBe(int expectedScore) throws Throwable {
+        assertEquals(expectedScore, game.getScore());
     }
 }
