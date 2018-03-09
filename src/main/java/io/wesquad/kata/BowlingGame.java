@@ -3,44 +3,42 @@ package io.wesquad.kata;
 public class BowlingGame {
 
     private int score = 0;
-
     private int frameCounter = 1;
-
     private int frameRollsCounter = 1;
 
-    private boolean spare = false;
+    private boolean previousFrameSpare = false;
 
     private int previousFallenPins = 0;
 
     public void rolls(int fallenPins) {
-
-        if (isFrameSecondRoll()) {
-
+        if (isSecondRoll()) {
             if (isSpare(fallenPins)) {
-                storeFallenPins(fallenPins);
+                this.previousFrameSpare = true;
             } else {
-                addFallenPinsToScore(fallenPins);
+                this.previousFrameSpare = false;
+                scoreNormalFrame(fallenPins);
             }
-
             createNewFrame();
 
         } else {
-
-            addPreviousFrameScoreBonus();
-
-            addFallenPinsToScore(fallenPins);
-
+            if(this.previousFrameSpare) {
+                addSpareBonus(fallenPins);
+            }
+            storeFallenPins(fallenPins);
             createNextRoll();
         }
+    }
+
+    private void scoreNormalFrame(int fallenPins) {
+        this.score += this.previousFallenPins + fallenPins;
     }
 
     private void createNextRoll() {
         this.frameRollsCounter++;
     }
 
-    private void addPreviousFrameScoreBonus() {
-        this.addFallenPinsToScore(this.previousFallenPins);
-        this.storeFallenPins(0);
+    private void addSpareBonus(int fallenPins) {
+        this.addFallenPinsToScore(10 + fallenPins);
     }
 
     private void createNewFrame() {
@@ -56,13 +54,12 @@ public class BowlingGame {
         this.score += fallenPins;
     }
 
-    private boolean isFrameSecondRoll() {
+    private boolean isSecondRoll() {
         return frameRollsCounter == 2;
     }
 
     private boolean isSpare(int fallenPins) {
-        this.spare = this.frameRollsCounter % 2 == 0 && (this.score + fallenPins) == 10;
-        return this.spare;
+        return this.previousFallenPins + fallenPins == 10;
     }
 
     public int getScore() {
