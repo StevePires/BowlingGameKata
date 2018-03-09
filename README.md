@@ -9,3 +9,4 @@ Tests are written in Gherkin, you can run then in IntelliJ by installing "Cucumb
 
 ## LINKS
 [Download IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
+[Inspired from (BowlingGameKata.md)](https://github.com/hontas/bowling-game-kata)
