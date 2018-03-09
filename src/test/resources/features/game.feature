@@ -25,9 +25,17 @@ Feature: Bowling sample feature
     And i roll the ball and hit 7 pins
     Then my score should be 3
 
-  Scenario: I knocked first spare
+  Scenario: I knocked first spare plus one roll
     Given a new bowling game
     When i roll the ball and hit 3 pins
     And i roll the ball and hit 7 pins
     And i roll the ball and hit 6 pins
+    Then my score should be 21
+
+  Scenario: I knocked second spare
+    Given a new bowling game
+    When i roll the ball and hit 3 pins
+    And i roll the ball and hit 7 pins
+    And i roll the ball and hit 6 pins
+    And i roll the ball and hit 4 pins
     Then my score should be 21
